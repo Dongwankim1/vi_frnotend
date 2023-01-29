@@ -8,7 +8,7 @@ const Search = props => {
         <>
             <Container>
 
-                <Grid>
+                <Grid container stackable verticalAlign='middle'>
                     <Grid.Row>
                         <IndiSearchCheckBoxList/>
                     </Grid.Row>
