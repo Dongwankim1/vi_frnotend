@@ -12,22 +12,69 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import {Alert, AlertTitle, Dialog} from "@mui/material";
+import {useState} from "react";
 
 
 
 const theme = createTheme();
 
 export default function SignUp() {
+    const [open, setOpen] = React.useState(false);
+    const [errorMessage,setErrorMessage] = useState();
+    const handleClick = () => {
+        setOpen(!open);
+    };
+
+    const validateEmail = (email) => {
+        let result = true;
+       if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email)) {
+           result = false;
+        }
+
+        return result;
+    }
+
+    const validatePassword = (password) => {
+        let result = true;
+        if (!/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/i.test(password)) {
+            result = false;
+        }
+
+        return result;
+    }
+
     const handleSubmit = (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
-        console.log({
-            email: data.get('email'),
-            password: data.get('password'),
-        });
+        const email = data.get('email');
+        const name = data.get('name');
+        const password = data.get('password');
+        const confirmpassword = data.get('confirmpassword');
+
+        console.log(email);
+        if(!validateEmail(email)){
+            handleClick();
+            setErrorMessage("이메일 형식이 잘못되었습니다. 확인 해주세요!");
+            return;
+        }
+        if(!validatePassword(password)){
+            handleClick();
+            setErrorMessage("비밀번호는 8자리이상 영문 숫자 특수문자 하나를 포함하여야 합니다.");
+            return;
+        }
+        if(password!=confirmpassword){
+            handleClick();
+            setErrorMessage("비밀번호가 서로 다릅니다. 확인 해주세요!");
+            return;
+        }
+
+
+
     };
 
     return (
+        <>
         <ThemeProvider theme={theme}>
             <Container component="main" maxWidth="xs">
                 <CssBaseline />
@@ -81,6 +128,17 @@ export default function SignUp() {
                                 />
                             </Grid>
                             <Grid item xs={12}>
+                                <TextField
+                                    required
+                                    fullWidth
+                                    name="confirmpassword"
+                                    label="Confirm Password"
+                                    type="password"
+                                    id="confirmpassword"
+                                    autoComplete="confirm-password"
+                                />
+                            </Grid>
+                            <Grid item xs={12}>
                                 <FormControlLabel
                                     control={<Checkbox value="allowExtraEmails" color="primary" />}
                                     label="I want to receive inspiration, marketing promotions and updates via email."
@@ -103,8 +161,17 @@ export default function SignUp() {
                             </Grid>
                         </Grid>
                     </Box>
+                    <Dialog open={open} onClose={handleClick}>
+                        <Alert severity="error">
+                            <AlertTitle>Error</AlertTitle>
+                            {errorMessage}
+                        </Alert>
+                    </Dialog>
                 </Box>
+
             </Container>
         </ThemeProvider>
+
+            </>
     );
 }
