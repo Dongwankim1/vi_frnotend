@@ -18,7 +18,12 @@ import { mainListItems, secondaryListItems } from './listItems';
 import { BrowserRouter, Route,  Routes} from "react-router-dom";
 import Search from "./Search"
 import ChartList from './ChartList'
+import Login from './login/Login'
 import Link from "@mui/material/Link";
+import {Context} from '../util/AppContext';
+import {useContext} from "react";
+import Button from "@mui/material/Button";
+import { Link as reactLink} from "react-router-dom";
 
 const drawerWidth = 240;
 
@@ -82,6 +87,8 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 const mdTheme = createTheme();
 
 function DashboardContent() {
+  const context = useContext(Context);
+
   const [open, setOpen] = React.useState(true);
   const toggleDrawer = () => {
     setOpen(!open);
@@ -125,6 +132,17 @@ function DashboardContent() {
                 <NotificationsIcon />
               </Badge>
             </IconButton>
+
+              <Button variant="outlined" style={{
+                  borderRadius: 35,
+                  backgroundColor: "#ffffff",
+                  fontSize: "14px",
+                  marginLeft:"8px"
+
+              }} component={reactLink} to={'/login'}>
+                  Login
+              </Button>
+
           </Toolbar>
         </AppBar>
         <Drawer variant="permanent" open={open}>
@@ -166,6 +184,8 @@ function DashboardContent() {
             </Route>
             <Route path="/day" element={<Search/>}>
             </Route>
+              <Route path="/login" element={<Login/>}>
+              </Route>
           </Routes>
 
 

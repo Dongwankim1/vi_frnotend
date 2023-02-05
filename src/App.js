@@ -1,20 +1,22 @@
 import './App.css';
 import Dashboard from './component/Dashboard';
-import Header from './component/Header';
-import Nav from "./component/Nav";
+import {Context} from './util/AppContext';
 
 import * as React from "react";
+import {useState} from "react";
+
 function App() {
-    const [open, setOpen] = React.useState(true);
-    const toggleDrawer = () => {
-        setOpen(!open);
-    };
+
+  const [isLogin,setIsLogin] = useState(false);
+
 
 
   return (
 
     <div className="App">
+        <Context.Provider value={{isLogin,setIsLogin}}>
             <Dashboard />
+        </Context.Provider>
     </div>
 
   );
