@@ -24,6 +24,8 @@ import {Context} from '../util/AppContext';
 import {useContext} from "react";
 import Button from "@mui/material/Button";
 import { Link as reactLink} from "react-router-dom";
+import SignUp from "./login/SignUp";
+import Forgot from "./login/Forgot";
 
 const drawerWidth = 240;
 
@@ -185,6 +187,10 @@ function DashboardContent() {
             <Route path="/day" element={<Search/>}>
             </Route>
               <Route path="/login" element={<Login/>}>
+              </Route>
+              <Route path="/signup" element={<SignUp/>}>
+              </Route>
+              <Route path="/forgot" element={<Forgot/>}>
               </Route>
           </Routes>
 
