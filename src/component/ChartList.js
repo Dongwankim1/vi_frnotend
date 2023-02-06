@@ -7,7 +7,6 @@ import Deposits from "./Deposits";
 import Orders from "./Orders";
 import Button from "@mui/material/Button";
 import SendIcon from "@mui/icons-material/Send";
-import { makeStyles } from '@mui/styles';
 import CheckBoxIcon from '@mui/icons-material/CheckBox';
 import Box from "@mui/material/Box";
 import FormControl from '@mui/material/FormControl';
@@ -22,7 +21,6 @@ import {useContext} from "react";
 const ChartList = props => {
     const isLogin = useContext(Context);
 
-    const classes = useStyles();
     const [state, setState] = React.useState({
         gilad: true,
         jason: false,
@@ -39,7 +37,7 @@ const ChartList = props => {
         <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
             <Box container>
                 <Box>
-                    <FormControl component="fieldset" className={classes.formControl}>
+                    <FormControl component="fieldset" >
                         <FormLabel component="legend">Assign responsibility</FormLabel>
                         <FormGroup>
                             <FormControlLabel
@@ -57,7 +55,7 @@ const ChartList = props => {
                         </FormGroup>
                         <FormHelperText>Be careful</FormHelperText>
                     </FormControl>
-                    <FormControl required error={error} component="fieldset" className={classes.formControl}>
+                    <FormControl required error={error} component="fieldset" >
                         <FormLabel component="legend">Pick two</FormLabel>
                         <FormGroup>
                             <FormControlLabel
@@ -130,16 +128,5 @@ const ChartList = props => {
     );
 };
 
-const useStyles = makeStyles((theme) => ({
-    container: {
-        border: '1px solid green',
-    },
-    root: {
-        display: 'flex',
-    },
-    formControl: {
-        margin: theme.spacing(3),
-    },
-}));
 
 export default ChartList;

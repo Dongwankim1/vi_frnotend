@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import { Container,Grid } from 'semantic-ui-react'
 import axios from 'axios';
 import IndiSearchCehckBoxItem from "./IndiSearchCehckBoxItem";
+import Box from "@mui/material/Box";
 
 
 const IndiSearchCheckBoxList = props => {
@@ -39,6 +40,9 @@ const IndiSearchCheckBoxList = props => {
                 return (<Grid.Column><IndiSearchCehckBoxItem key={item.indiType} label={item.indiName}/></Grid.Column>)
             })}
             </Grid>
+            <Box>
+
+            </Box>
         </Container>
     );
 };
